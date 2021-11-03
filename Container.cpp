@@ -16,3 +16,8 @@ int Container::GetId(){
 float Container::GetCapacity(){
     return Capacity;
 }
+
+string Container::ToString(){
+    string line = "Id: " + std::to_string(this -> GetId()) + " Capacity: " + std::to_string(this -> GetCapacity());
+    return line;
+}

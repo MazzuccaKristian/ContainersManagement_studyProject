@@ -1,3 +1,7 @@
+#include <string>
+
+using std::string;
+
 class Container{
     private:
         int IdCode;
@@ -8,4 +12,5 @@ class Container{
         void SetContainer(int idCode, float capacity);
         int GetId();
         float GetCapacity();
+        string ToString();
 };
