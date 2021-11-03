@@ -37,6 +37,7 @@ void ShowPort(){
     ifstream port (PORT);
     if(port.is_open()){
         string line;
+        cout << endl;
         while(getline(port, line)){
             cout << line << endl;
         }
