@@ -3,6 +3,8 @@
 #include <string>
 
 #include "Container.h"
+#include "HeavyContainer.h"
+#include "RefrigeratedContainer.h"
 
 #define PORT "port.txt"
 
@@ -19,3 +21,7 @@ void ShowMainMenu();
 void ShowPort();
 
 void AddNewContainer();
+
+void AddNewHeavyContainer();
+
+void AddNewRefrigeratedContainer();
