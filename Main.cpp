@@ -20,6 +20,10 @@ int main(){
             case 2:
                 AddNewContainer();
                 break;
+
+            case 3:
+                AddNewHeavyContainer();
+                break;
         }
     }
     return 0;
@@ -29,6 +33,7 @@ void ShowMainMenu(){
     cout << "MAIN MENU" << endl;
     cout << "1) Show port's detail;" << endl;
     cout << "2) Add new container;" << endl;
+    cout << "3) Add new heavy container;" << endl;
     cout << "0) Exit." << endl;
     cout << "Enter your choice: ";
 }
@@ -62,4 +67,25 @@ void AddNewContainer(){
     }else{
         perror("Can't open file");
     }
+    port.close();
+}
+
+void AddNewHeavyContainer(){
+    ofstream port;
+    int id;
+    float capacity, explCapacity;
+    cout << "Enter id: ";
+    cin >> id;
+    cout << "Enter max capacity: ";
+    cin >> capacity;
+    cout << "Enter max capacity (explosives): ";
+    cin >> explCapacity;
+    HeavyContainer newHeavyContainer(id, capacity, explCapacity);
+    port.open(PORT, ofstream::app);
+    if(port.is_open()){
+        port << newHeavyContainer.ToString() << endl;
+    }else{
+        perror("Can't open file");
+    }
+    port.close();
 }
