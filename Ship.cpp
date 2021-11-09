@@ -26,3 +26,11 @@ bool Ship::GetExplosive(){
 bool Ship::GetRefrigerator(){
     return Refrigerator;
 }
+
+string Ship::ToString(){
+    string line = "Id: " + std::to_string(this -> GetId()) + " Capacity: " +
+        std::to_string(this -> GetMaxContainers()) + " Explosive: " +
+        std::to_string(this -> GetExplosive()) + " Refrigerator: "+
+        std::to_string(this -> GetRefrigerator());
+    return line;
+}

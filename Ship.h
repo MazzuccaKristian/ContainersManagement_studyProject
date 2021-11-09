@@ -1,3 +1,7 @@
+#include <string>
+
+using std::string;
+
 class Ship {
     private:
         int Id, MaxContainers;
@@ -10,4 +14,5 @@ class Ship {
         int GetMaxContainers();
         bool GetExplosive();
         bool GetRefrigerator();
+        string ToString();
 };
