@@ -20,7 +20,7 @@ using std::string;
 
 void ShowMainMenu();
 
-void ShowPort();
+void ShowContainers();
 
 void AddNewContainer();
 
@@ -31,3 +31,7 @@ void AddNewRefrigeratedContainer();
 void AddNewShip();
 
 void SaveShip(Ship* ship);
+
+void PlanNewDelivery();
+
+bool CheckShip(int id);

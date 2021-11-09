@@ -14,7 +14,7 @@ int main(){
                 break;
 
             case 1:
-                ShowPort();
+                ShowContainers();
                 break;
 
             case 2:
@@ -33,6 +33,10 @@ int main(){
                 AddNewShip();
                 break;
 
+            case 6:
+                PlanNewDelivery();
+                break;
+
             //TODO: Implements ships. Implements load/unload logic.
         }
     }
@@ -41,49 +45,51 @@ int main(){
 
 void ShowMainMenu(){
     cout << "MAIN MENU" << endl;
-    cout << "1) Show port's detail;" << endl;
+    cout << "1) Show containers in port;" << endl;
     cout << "2) Add new container;" << endl;
     cout << "3) Add new heavy container;" << endl;
     cout << "4) Add new refrigerated container;" << endl;
     cout << "5) Add new ship;" << endl;
+    cout << "6) Plan new delivery;" << endl;
     cout << "0) Exit." << endl;
     cout << "Enter your choice: ";
 }
 
-void ShowPort(){
-    ifstream port (CONTAINERS);
-    if(port.is_open()){
+void ShowContainers(){
+    ifstream containers (CONTAINERS);
+    if(containers.is_open()){
         string line;
         cout << endl;
-        while(getline(port, line)){
+        while(getline(containers, line)){
             cout << line << endl;
         }
         cout << endl;
     }else{
         perror("Can't open file");
     }
+    containers.close();
 }
 
 void AddNewContainer(){
     int id;
     float capacity;
-    ofstream port;
+    ofstream containers;
     cout << "Enter id: ";
     cin >> id;
     cout << "Enter max capacity: ";
     cin >> capacity;
     Container newContainer(id, capacity);
-    port.open(CONTAINERS, ofstream::app);
-    if(port.is_open()){
-        port << newContainer.ToString() << endl;
+    containers.open(CONTAINERS, ofstream::app);
+    if(containers.is_open()){
+        containers << newContainer.ToString() << endl;
     }else{
         perror("Can't open file");
     }
-    port.close();
+    containers.close();
 }
 
 void AddNewHeavyContainer(){
-    ofstream port;
+    ofstream containers;
     int id;
     float capacity, explCapacity;
     cout << "Enter id: ";
@@ -93,17 +99,17 @@ void AddNewHeavyContainer(){
     cout << "Enter max capacity (explosives): ";
     cin >> explCapacity;
     HeavyContainer newHeavyContainer(id, capacity, explCapacity);
-    port.open(CONTAINERS, ofstream::app);
-    if(port.is_open()){
-        port << newHeavyContainer.ToString() << endl;
+    containers.open(CONTAINERS, ofstream::app);
+    if(containers.is_open()){
+        containers << newHeavyContainer.ToString() << endl;
     }else{
         perror("Can't open file");
     }
-    port.close();
+    containers.close();
 }
 
 void AddNewRefrigeratedContainer(){
-    ofstream port;
+    ofstream containers;
     int id;
     float capacity, explCapacity, refrigCapacity;
     cout << "Enter id: ";
@@ -115,13 +121,13 @@ void AddNewRefrigeratedContainer(){
     cout << "Enter max capacity (refrigerator): ";
     cin >> refrigCapacity;
     RefrigeratedContainer newRefrigeratedContainer(id, capacity, explCapacity, refrigCapacity);
-    port.open(CONTAINERS, ofstream::app);
-    if(port.is_open()){
-        port << newRefrigeratedContainer.ToString() << endl;
+    containers.open(CONTAINERS, ofstream::app);
+    if(containers.is_open()){
+        containers << newRefrigeratedContainer.ToString() << endl;
     }else{
         perror("Can't open file");
     }
-    port.close();
+    containers.close();
 }
 
 void AddNewShip(){
@@ -151,9 +157,36 @@ void SaveShip(Ship* ship){
     ofstream ships;
     ships.open(SHIPS, ofstream::app);
     if(ships.is_open()){
-        ships << "CHECK" << endl;
+        ships << ship -> ToString() << endl;
     }else{
         perror("Can't open file");
     }
     ships.close();
+}
+
+void PlanNewDelivery(){
+    int shipId;
+    cout << "Enter the id of the ship: ";
+    cin >> shipId;
+    if(CheckShip(shipId)){
+        //TODO: select containers and load the ship.
+    }else{
+        cout << "This ship isn't available. Please, try again..." << endl;
+    }
+}
+
+bool CheckShip(int id){
+    bool check = false;
+    ifstream ships (SHIPS);
+    if(ships.is_open()){
+        string key, value;
+        while(ships >> key >> value){
+            if(key.compare("ID:") && std::stoi(value) == id){
+                check = true;
+            }
+        }
+    }else{
+        perror("Can't open file");
+    }
+    return check;
 }
