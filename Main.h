@@ -5,8 +5,10 @@
 #include "Container.h"
 #include "HeavyContainer.h"
 #include "RefrigeratedContainer.h"
+#include "Ship.h"
 
-#define PORT "port.txt"
+#define CONTAINERS "containers.txt"
+#define SHIPS "ships.txt"
 
 using std::cin;
 using std::cout;
@@ -25,3 +27,7 @@ void AddNewContainer();
 void AddNewHeavyContainer();
 
 void AddNewRefrigeratedContainer();
+
+void AddNewShip();
+
+void SaveShip(Ship* ship);
